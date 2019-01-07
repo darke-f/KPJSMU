@@ -9,11 +9,15 @@
     <title>Document</title>
 </head>
 <body>
+    <br>
 	<a href="masterbarang.php"> master barang</a><br>
 	<a href="mastercustomer.php"> master customer</a><br>
 	<a href="mastersupplier.php"> master supplier</a><br>
 	<a href="formbeli.php">form pembelian</a><br>
     <?php
+
+        /*$sql = "UPDATE tutup_bulan SET current = '2019-01-01'";
+        $res = $conn->query($sql);*/
 
         $sql = "SELECT * FROM tutup_bulan";
         $res = $conn->query($sql);
