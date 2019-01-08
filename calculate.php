@@ -1,8 +1,6 @@
 <?php
     require_once 'connect.php';
 
-    $transaction_date = 'JAN2019';
-
     $sql = "SELECT * FROM tutup_bulan";
     $res = $conn->query($sql);
 
@@ -18,7 +16,7 @@
     $sql = "UPDATE $tablename SET pengeluaran = 0";
     $conn->query($sql);
 
-    $sql = "SELECT mb.kodeBarang, mb.namaBarang, mb.satuanBarang, SUM(b.quantity) AS jumlah_beli FROM belihdr JOIN belidtl b ON (belihdr.noTransaksiBeli=b.noTransaksiBeli) JOIN masterbarang mb ON (b.kodeBarang = mb.kodeBarang) WHERE DATE_FORMAT(belihdr.tanggalTransaksiBeli, '%b%Y') = '$transaction_date' GROUP BY mb.kodeBarang";
+    $sql = "SELECT mb.kodeBarang, mb.namaBarang, mb.satuanBarang, SUM(b.quantity) AS jumlah_beli FROM belihdr JOIN belidtl b ON (belihdr.noTransaksiBeli=b.noTransaksiBeli) JOIN masterbarang mb ON (b.kodeBarang = mb.kodeBarang) WHERE DATE_FORMAT(belihdr.tanggalTransaksiBeli, '%b%Y') = '$monthdate' GROUP BY mb.kodeBarang";
     $res = $conn->query($sql);
 
     While($row = $res->fetch_assoc()) {
@@ -31,7 +29,7 @@
         }
     }
 
-    $sql = "SELECT mb.kodeBarang, mb.namaBarang, mb.satuanBarang, SUM(j.quantity) AS jumlah_jual FROM jualhdr JOIN jualdtl j ON (jualhdr.noTransaksiJual=j.noTransaksiJual) JOIN masterbarang mb ON (j.kodeBarang = mb.kodeBarang) WHERE DATE_FORMAT(jualhdr.tanggalTransaksiJual, '%b%Y') = '$transaction_date' GROUP BY mb.kodeBarang";
+    $sql = "SELECT mb.kodeBarang, mb.namaBarang, mb.satuanBarang, SUM(j.quantity) AS jumlah_jual FROM jualhdr JOIN jualdtl j ON (jualhdr.noTransaksiJual=j.noTransaksiJual) JOIN masterbarang mb ON (j.kodeBarang = mb.kodeBarang) WHERE DATE_FORMAT(jualhdr.tanggalTransaksiJual, '%b%Y') = '$monthdate' GROUP BY mb.kodeBarang";
     $res = $conn->query($sql);
 
     While($row = $res->fetch_assoc()) {
